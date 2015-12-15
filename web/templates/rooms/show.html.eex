@@ -1,0 +1,33 @@
+<div class="row">
+  <div class="col-sm-4">
+    <h2>Rooms</h2>
+    <ul id="rooms">
+      <li><a href="<%= lobby_path(@conn, :show) %>">Lobby</a></li>
+      <li><a href="<%= room_path(@conn, :show, "Help") %>">Help</a></li>
+    </ul>
+  </div>
+  <div class="col-sm-8">
+    <h1><%= @room_id %></h1>
+    <div id="chatbox"></div>
+
+    <div id="chatline">
+      <form>
+        <input type="hidden" name="_csrf_token" id="csrf_tk" value="<%= get_csrf_token() %>">
+        <input type="hidden" name="room_id" id="room_id" value="<%= @room_id %>">
+        <div class="form-group">
+          <div class="row">
+            <div class="col-sm-4">
+              <input type="text" name="user" id="user" placeholder="User name" class="form-control"/>
+            </div>
+            <div class="col-sm-7">
+              <input type="text" name="body" id="body" placeholder="Message" class="form-control"/>
+            </div>
+            <div class="col-sm-1">
+              <input id="submit" type="submit" class="btn btn-default" value="Say"/>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

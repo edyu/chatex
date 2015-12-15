@@ -16,7 +16,8 @@ defmodule Chatex.Router do
   scope "/", Chatex do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+    get "/", RoomsController, :show, as: :lobby
+    get "/:id", RoomsController, :show, as: :room
   end
 
   # Other scopes may use custom stacks.

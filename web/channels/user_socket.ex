@@ -2,7 +2,7 @@ defmodule Chatex.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "rooms:*", Chatex.RoomChannel
+  channel "rooms:*", Chatex.RoomChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket

@@ -54,7 +54,25 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 socket.connect()
 
 // Now that you are connected, you can join channels with a topic:
-let channel = socket.channel("topic:subtopic", {})
+let submit = $("#submit");
+let room = $("#room_id").val();
+let channel = socket.channel("rooms:" + room, {});
+let chatInput = $("#body");
+let chatBox = $("#chatbox");
+
+submit.on("click", function(e) {
+  e.preventDefault();
+  let user = $("#user");
+  let body = $("#body");
+  channel.push("new_msg", { user: user.val(), body: body.val() });
+  chatInput.val("");
+});
+
+channel.on("new_msg", data => {
+  var div = $("<div class='alert alert-info'></div>").text(data.user + " said: " + data.body);
+  chatBox.append(div);
+});
+
 channel.join()
   .receive("ok", resp => { console.log("Joined successfully", resp) })
   .receive("error", resp => { console.log("Unable to join", resp) })
